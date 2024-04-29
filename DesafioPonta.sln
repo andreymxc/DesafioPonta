@@ -3,7 +3,43 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioPonta.Api.Application", "DesafioPonta.Api.Application\DesafioPonta.Api.Application.csproj", "{713E2CE6-AE4A-4134-9816-3DA31F9C453E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioPonta.Api.CrossCutting.DependecyInjection", "DesafioPonta.Api.CrossCutting.DependecyInjection\DesafioPonta.Api.CrossCutting.DependecyInjection.csproj", "{6A4883D0-A50B-4843-BD6A-ADE02BEE7CF3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioPonta.Api.Infraestructure", "DesafioPonta.Api.Infraestructure\DesafioPonta.Api.Infraestructure.csproj", "{888A7B0B-81E6-4DD0-BDA7-AEB3A14CA6CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioPonta.Api.Domain", "DesafioPonta.Domain\DesafioPonta.Api.Domain.csproj", "{82051C2B-456C-441A-B1CB-41E6EB960581}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioPonta.Api", "DesafioPonta.Api\DesafioPonta.Api.csproj", "{6CBC3598-FEEF-4ECF-ABF8-5C3487E8997B}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{713E2CE6-AE4A-4134-9816-3DA31F9C453E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{713E2CE6-AE4A-4134-9816-3DA31F9C453E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{713E2CE6-AE4A-4134-9816-3DA31F9C453E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{713E2CE6-AE4A-4134-9816-3DA31F9C453E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A4883D0-A50B-4843-BD6A-ADE02BEE7CF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A4883D0-A50B-4843-BD6A-ADE02BEE7CF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A4883D0-A50B-4843-BD6A-ADE02BEE7CF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A4883D0-A50B-4843-BD6A-ADE02BEE7CF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{888A7B0B-81E6-4DD0-BDA7-AEB3A14CA6CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{888A7B0B-81E6-4DD0-BDA7-AEB3A14CA6CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{888A7B0B-81E6-4DD0-BDA7-AEB3A14CA6CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{888A7B0B-81E6-4DD0-BDA7-AEB3A14CA6CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82051C2B-456C-441A-B1CB-41E6EB960581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82051C2B-456C-441A-B1CB-41E6EB960581}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82051C2B-456C-441A-B1CB-41E6EB960581}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82051C2B-456C-441A-B1CB-41E6EB960581}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CBC3598-FEEF-4ECF-ABF8-5C3487E8997B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CBC3598-FEEF-4ECF-ABF8-5C3487E8997B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CBC3598-FEEF-4ECF-ABF8-5C3487E8997B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CBC3598-FEEF-4ECF-ABF8-5C3487E8997B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
