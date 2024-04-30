@@ -30,28 +30,29 @@ namespace DesafioPonta.Api.Infraestructure.Repositories
             return await _dbContext.Tarefas.FirstOrDefaultAsync(i => i.Id == id);
         }
 
-        public async Task<ICollection<Tarefa?>> GetByStatusAsync(StatusTarefa status)
+        public async Task<ICollection<Tarefa>> GetByStatusAsync(StatusTarefa status)
         {
             return await _dbContext.Tarefas.Where(i => i.Status == status).ToListAsync();
         }
 
-        public async Task<Tarefa?> EditAsync(Tarefa editTarefa)
+        public async Task<Tarefa?> EditAsync(Tarefa tarefa)
         {
-            var existingTarefa = await _dbContext.Tarefas.FindAsync(editTarefa.Id);
+            var existingTarefa = await _dbContext.Tarefas.FirstOrDefaultAsync(i=>i.Id == tarefa.Id);
 
             if (existingTarefa != null)
             {
-                _dbContext.Entry(existingTarefa).State = EntityState.Detached;
+                existingTarefa.Titulo = tarefa.Titulo;
+                existingTarefa.Descricao = tarefa.Descricao;
+                existingTarefa.Status = tarefa.Status;
+
+                _dbContext.Update(existingTarefa);
+
+                await _dbContext.SaveChangesAsync();
             }
 
-            editTarefa.CriadoEm = existingTarefa.CriadoEm;            
-            
-            _dbContext.Update(editTarefa);
-            
-            await _dbContext.SaveChangesAsync();
-            
-            return editTarefa;
+            return existingTarefa;
         }
+
 
         public async Task DeleteByIdAsync(Guid id)
         {

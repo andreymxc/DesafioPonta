@@ -70,8 +70,12 @@ namespace DesafioPonta.Api.Application.Services
 
                 var entityTarefa = _mapper.Map<Tarefa>(tarefaDTO);
 
-                entityTarefa.UserId = existingTarefa.UserId;
                 var data = await _tarefaRepository.EditAsync(entityTarefa);
+
+                if(data is null)
+                {
+                    return ResultService.Fail<TarefaDTO>("Erro ao editar tarefa");
+                }
 
                 return ResultService.Ok(_mapper.Map<TarefaDTO>(data));
             }
@@ -89,7 +93,7 @@ namespace DesafioPonta.Api.Application.Services
             if (tarefa is null || tarefa?.Ativo == false)
                 return ResultService.NotFound("Tarefa não encontrada");
 
-            if(!VerificaUsuarioCriador(tarefa.Id, token))
+            if(!VerificaUsuarioCriador(tarefa.UserId, token))
                 return ResultService.Forbidden<TarefaDTO>("Usuário não tem permissão para realizar essa ação");
 
             await _tarefaRepository.DeleteByIdAsync(id);
