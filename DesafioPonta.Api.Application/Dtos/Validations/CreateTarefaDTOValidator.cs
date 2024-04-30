@@ -24,8 +24,6 @@ namespace DesafioPonta.Api.Application.Dtos.Validations
                .WithMessage("Descricao não deve ser vazio ou nulo");
 
             RuleFor(tarefa => tarefa.Status)
-             .NotEmpty()
-             .NotNull()
              .Must(status => Enum.IsDefined(typeof(StatusTarefa), status))
              .WithMessage("Status inválido");
         }
