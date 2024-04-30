@@ -1,10 +1,4 @@
-﻿using DesafioPonta.Api.Application.Dtos.Tarefa;
-using DesafioPonta.Api.Application.Dtos.Usuario;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DesafioPonta.Api.Application.Dtos.Usuario;
 
 namespace DesafioPonta.Api.Application.Services.Interfaces
 {

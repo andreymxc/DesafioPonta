@@ -16,8 +16,6 @@ namespace DesafioPonta.Api.Infraestructure.Authentication
     {
         private const int _tokenExpirationInDays = 1;
         private const string _securityKey = "DesafioPontaTokenSecurityKey123456789012";
-        private const string _emailClaim = "Email";
-        private const string _idClaim = "Id";
 
         private readonly IHttpContextAccessor _httpContextAccessor;
         public AuthTokenHandler(IHttpContextAccessor httpContextAccessor)

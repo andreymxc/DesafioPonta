@@ -8,7 +8,7 @@ namespace DesafioPonta.Api.Application.Services.Interfaces
         Task<ResultService<ICollection<TarefaDTO>>> GetAllAsync();
         Task<ResultService<TarefaDTO>> CreateAsync(CreateTarefaDTO tarefaDTO, string token);
         Task<ResultService<ICollection<TarefaDTO>>> GetByStatusAsync(StatusTarefa status);
-        Task<ResultService<TarefaDTO>> EditAsync(TarefaDTO tarefaDTO, string token);
+        Task<ResultService<TarefaDTO>> EditAsync(EditTarefaDTO tarefaDTO, string token);
         Task<ResultService> DeleteAsync(Guid id, string token);
         Task<ResultService> GetEnumValues();
     }

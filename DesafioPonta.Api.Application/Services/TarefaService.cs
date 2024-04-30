@@ -56,7 +56,7 @@ namespace DesafioPonta.Api.Application.Services
             }
         }
 
-        public async Task<ResultService<TarefaDTO>> EditAsync(TarefaDTO tarefaDTO, string token)
+        public async Task<ResultService<TarefaDTO>> EditAsync(EditTarefaDTO tarefaDTO, string token)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace DesafioPonta.Api.Application.Services
             if (tarefa is null || tarefa?.Ativo == false)
                 return ResultService.NotFound("Tarefa não encontrada");
 
-            if(!VerificaUsuarioCriador(id, token))
+            if(!VerificaUsuarioCriador(tarefa.Id, token))
                 return ResultService.Forbidden<TarefaDTO>("Usuário não tem permissão para realizar essa ação");
 
             await _tarefaRepository.DeleteByIdAsync(id);
@@ -132,8 +132,8 @@ namespace DesafioPonta.Api.Application.Services
 
             var enumData = enumValues.Select(e => new
             {
-                Value = (int)e,
-                Description = e.ToString()
+                Valor = (int)e,
+                Descricao = e.ToString()
             });
 
             return ResultService.Ok(enumData);

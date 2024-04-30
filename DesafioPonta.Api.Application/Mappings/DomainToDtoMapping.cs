@@ -11,6 +11,7 @@ namespace DesafioPonta.Api.Application.Mappings
         {
 
             CreateMap<Tarefa, CreateTarefaDTO>();
+            CreateMap<Tarefa, EditTarefaDTO>();
             CreateMap<Tarefa, TarefaDTO>();
             CreateMap<Usuario, CreateUsuarioDTO>();
             CreateMap<Usuario, UsuarioDTO>();

@@ -14,7 +14,7 @@ namespace DesafioPonta.Api.Application.Services
         private const int _ok = 200;
         private const int _notFound = 400;
         private const int _internalServerError = 500;
-        private const int _forbidden = 403;
+        private const int _forbidden = 401;
 
         public bool IsSuccess { get; set;}
         public string Message { get; set; }

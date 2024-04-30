@@ -82,7 +82,7 @@ namespace DesafioPonta.Api.Controllers
         [ProducesResponseType(typeof(ResultService<TarefaDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResultService<TarefaDTO>), StatusCodes.Status404NotFound)]
         [Route("Editar")]
-        public async Task<ActionResult> Edit(TarefaDTO tarefa)
+        public async Task<ActionResult> Edit(EditTarefaDTO tarefa)
         {
             string token = AuthorizationHelper.GetTokenFromHeader(HttpContext.Request);
             var result = await _tarefaService.EditAsync(tarefa, token);
