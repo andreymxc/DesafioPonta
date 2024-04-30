@@ -15,6 +15,11 @@ namespace DesafioPonta.Api.Domain.Models.Entities
         public Guid UserId { get; set; }
         public bool Ativo { get; set; }
 
+        public Tarefa()
+        {
+
+        }
+
         public Tarefa(string titulo, string descricao, StatusTarefa status)
         {
             Validation(titulo, descricao, status);  
@@ -31,7 +36,7 @@ namespace DesafioPonta.Api.Domain.Models.Entities
 
         private void Validation(string titulo, string descricao, StatusTarefa status)
         {
-            DomainValidationException.When(string.IsNullOrWhiteSpace(titulo), "Nome deve ser informado");
+            DomainValidationException.When(string.IsNullOrWhiteSpace(titulo), "Título deve ser informado");
             DomainValidationException.When(string.IsNullOrWhiteSpace(descricao), "Descrição deve ser informada");
             DomainValidationException.When(!Enum.IsDefined(typeof(StatusTarefa), status), "Status da tarefa é inválido");
 

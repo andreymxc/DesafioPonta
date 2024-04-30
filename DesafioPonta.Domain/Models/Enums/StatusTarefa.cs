@@ -4,6 +4,6 @@
     {
         Pendente,
         EmAndamento,
-        Finalizada
+        Concluida
     }
 }
