@@ -1,23 +1,24 @@
-Instrução de como executar a API localmente em sua máquina:
 
-Abra o Visual Studio 2022 e selecione a opção "Clone a Repository";
+Claro, aqui está o texto completo reformulado para maior clareza e amigabilidade:
 
-Em repository location, preencher com o link do repositório: https://github.com/andreymxc/DesafioPonta.v2.git;
+Para executar a API localmente em sua máquina, siga estes passos amigáveis:
 
-No Path, selecionar uma pasta VAZIA em um diretório de sua preferência e depois clique em "Clone";
+Abra o Visual Studio 2022 e clique em "Clone a Repositório";
 
-Após a solução ser aberta, selecione o projeto DesafioPonta.Api (Projeto ASP.NET Core) como o o Start Up Project;
+Na seção "repository location", cole o link do repositório: https://github.com/andreymxc/DesafioPonta.v2.git;
+
+Escolha uma pasta VAZIA em seu diretório preferido em "Path" e clique em "Clone";
+
+Depois que a solução for aberta, selecione o projeto DesafioPonta.Api (Projeto ASP.NET Core) como o projeto inicial;
+
+Para garantir que a API funcione perfeitamente em sua máquina, não se esqueça de restaurar os pacotes do NuGet após clonar o repositório. Você pode fazer isso facilmente executando o comando dotnet restore no terminal do Visual Studio ou através do gerenciador de pacotes NuGet. Este passo é essencial para garantir que todas as dependências estejam corretamente instaladas e a aplicação possa ser executada sem problemas.
 
 Execute a aplicação via ISS Express;
 
-Ao ser direcionado para o Swagger, registre seu usuário no endpoint /Usuario/Cadastrar. É necessário um e-mail e uma senha forte.
+Ao ser direcionado para o Swagger, registre-se como usuário no endpoint /Usuario/Cadastrar. Precisaremos de um e-mail e uma senha forte.
 
-Após realizado o cadastro, use os mesmos dados inseridos no cadastro para se autenticar pelo endpoint /Usuario/Token. 
-Este endpoint retornará o token na propriedade "access_token".
+Depois de se cadastrar, use as mesmas informações inseridas para fazer login no endpoint /Usuario/Token. Esse endpoint retornará o token na propriedade "access_token".
 
-Após obter o token, clique no cadeado no topo da tela e no valor do textbox informe "Bearer <seuToken>"
-Exemplo: Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.
+Após obter o token, clique no cadeado no topo da tela e no valor do textbox informe "Bearer " seguido pelo token. Exemplo: Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.
 
-Após concluído este passos, você estará autenticado na aplicação e poderá realizar as operações envolvendo as tarefas!
-
-
+Com esses passos concluídos, você estará autenticado na aplicação e pronto para realizar o CRUD de tarefas.
