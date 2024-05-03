@@ -1,4 +1,4 @@
-Para executar a API localmente em sua máquina, siga estes passos amigáveis:
+Para executar a API localmente em sua máquina, siga estes passos:
 
 Abra o Visual Studio 2022 e clique em "Clone a Repositório";
 
