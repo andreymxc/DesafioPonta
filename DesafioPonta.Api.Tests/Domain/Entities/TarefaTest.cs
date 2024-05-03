@@ -84,6 +84,7 @@ namespace DesafioPonta.Api.Tests.Domain.Entities
             Assert.Equal(status, tarefa.Status);
         }
 
+
         [Fact]
         public void ShouldCreateTarefaSuccessfully_WhenIdIsValid()
         {

@@ -17,16 +17,16 @@ namespace DesafioPonta.Api.Controllers
             _usuarioService = usuarioService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetAll()
-        {
-            var result = await _usuarioService.GetAllAsync();
+        //[HttpGet]
+        //public async Task<ActionResult> GetAll()
+        //{
+        //    var result = await _usuarioService.GetAllAsync();
 
-            if (result.IsSuccess)
-                return Ok(result);
+        //    if (result.IsSuccess)
+        //        return Ok(result);
 
-            return BadRequest(result);
-        }
+        //    return BadRequest(result);
+        //}
 
         /// <summary>
         /// Cadastro de usuário para obter acesso a aplicação.
@@ -34,15 +34,15 @@ namespace DesafioPonta.Api.Controllers
         /// <param name="usuario"></param>
         /// <returns></returns>
         [HttpPost]
-        [ProducesResponseType(typeof(ResultService<dynamic>),StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ResultService<dynamic>),StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResultService<CreateUsuarioDTO>), StatusCodes.Status400BadRequest)]
         [Route("Cadastrar")]
         public async Task<ActionResult> Create(CreateUsuarioDTO usuario)
         {
             var result = await _usuarioService.CreateUsuario(usuario);
             
             if (result.IsSuccess)
-                return Ok(result);
+                return Ok();
 
             return BadRequest(result);
         }

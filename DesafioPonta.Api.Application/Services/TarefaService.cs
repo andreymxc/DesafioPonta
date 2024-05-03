@@ -6,6 +6,7 @@ using DesafioPonta.Api.Domain.Authentication;
 using DesafioPonta.Api.Domain.Models.Entities;
 using DesafioPonta.Api.Domain.Models.Enums;
 using DesafioPonta.Api.Domain.Repositories;
+using FluentValidation;
 using Microsoft.Extensions.Logging;
 
 namespace DesafioPonta.Api.Application.Services
@@ -14,14 +15,14 @@ namespace DesafioPonta.Api.Application.Services
     {
         private readonly ITarefaRepository _tarefaRepository;
         private readonly IMapper _mapper;
-        private readonly ITokenGenerator _tokenHandler;
+        private readonly ITokenService _tokenService;
         private readonly ILogger _logger;
 
-        public TarefaService(ITarefaRepository tarefaRepository, ILogger<TarefaService> logger, IMapper mapper, ITokenGenerator tokenHandler)
+        public TarefaService(ITarefaRepository tarefaRepository, ILogger<TarefaService> logger, IMapper mapper, ITokenService tokenService)
         {
             _tarefaRepository = tarefaRepository;
             _mapper = mapper;
-            _tokenHandler = tokenHandler;
+            _tokenService = tokenService;
             _logger = logger;
         }
 
@@ -42,7 +43,7 @@ namespace DesafioPonta.Api.Application.Services
                 var entityTarefa = _mapper.Map<Tarefa>(tarefaDTO);
 
                 entityTarefa.Id = new Guid();
-                entityTarefa.UserId = Guid.Parse(_tokenHandler.GetUserIdFromToken(token));
+                entityTarefa.UserId = Guid.Parse(_tokenService.GetUserIdFromToken(token));
                 entityTarefa.Ativo = true;
 
                 var data = await _tarefaRepository.CreateAsync(entityTarefa);
@@ -60,74 +61,102 @@ namespace DesafioPonta.Api.Application.Services
         {
             try
             {
+                var result = new EditTarefaDTOValidator().Validate(tarefaDTO);
+
+                if (!result.IsValid)
+                {
+                    return ResultService.RequestError<TarefaDTO>("Erros de validação do objeto.", result);
+                }
+
                 var existingTarefa = await _tarefaRepository.GetByIdAsync(tarefaDTO.Id);
 
                 if (existingTarefa is null)
                     return ResultService.NotFound<TarefaDTO>("Tarefa não encontrada");
 
-                if (!VerificaUsuarioCriador(existingTarefa.UserId, token))
+                if (!_tokenService.CheckIfCreatedByUser(existingTarefa.UserId, token))
                     return ResultService.Forbidden<TarefaDTO>("Usuário não tem permissão para realizar essa ação");
 
                 var entityTarefa = _mapper.Map<Tarefa>(tarefaDTO);
 
                 var data = await _tarefaRepository.EditAsync(entityTarefa);
 
-                if(data is null)
+                if (data is null)
                 {
                     return ResultService.Fail<TarefaDTO>("Erro ao editar tarefa");
                 }
 
                 return ResultService.Ok(_mapper.Map<TarefaDTO>(data));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao editar tarefa");
                 return ResultService.InternalServerError<TarefaDTO>("Erro interno na aplicação");
-            }        
+            }
         }
 
         public async Task<ResultService> DeleteAsync(Guid id, string token)
         {
-            Tarefa tarefa = await _tarefaRepository.GetByIdAsync(id);
+            try
+            {
+                Tarefa tarefa = await _tarefaRepository.GetByIdAsync(id);
 
-            if (tarefa is null || tarefa?.Ativo == false)
-                return ResultService.NotFound("Tarefa não encontrada");
+                if (tarefa is null || tarefa?.Ativo == false)
+                    return ResultService.NotFound("Tarefa não encontrada");
 
-            if(!VerificaUsuarioCriador(tarefa.UserId, token))
-                return ResultService.Forbidden<TarefaDTO>("Usuário não tem permissão para realizar essa ação");
+                if (!_tokenService.CheckIfCreatedByUser(tarefa.UserId, token))
+                    return ResultService.Forbidden("Usuário não tem permissão para realizar essa ação");
 
-            await _tarefaRepository.DeleteByIdAsync(id);
+                await _tarefaRepository.DeleteByIdAsync(id);
 
-            return ResultService.Ok("Tarefa excluída com sucesso");
+                return ResultService.Ok("Tarefa excluída com sucesso");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao deletar tarefa");
+                return ResultService.InternalServerError("Erro interno na aplicação");
+            }
+
         }
 
         public async Task<ResultService<ICollection<TarefaDTO>>> GetAllAsync()
         {
-            var tarefas = await _tarefaRepository.GetAllAsync();
-
-            if (tarefas.Any())
+            try
             {
+                var tarefas = await _tarefaRepository.GetAllAsync();
                 var tarefasDto = _mapper.Map<ICollection<TarefaDTO>>(tarefas);
+
+                if (!tarefasDto.Any())
+                    return ResultService.NoContent(tarefasDto);
 
                 return ResultService.Ok(tarefasDto);
             }
-
-            return ResultService.Fail<ICollection<TarefaDTO>>("Sem tarefas cadastradas");
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao deletar tarefa");
+                return ResultService.InternalServerError<ICollection<TarefaDTO>>("Erro interno na aplicação");
+            }
         }
 
         public async Task<ResultService<ICollection<TarefaDTO>>> GetByStatusAsync(StatusTarefa status)
         {
-            var tarefas = await _tarefaRepository.GetByStatusAsync(status);
-
-            if (tarefas.Any())
+            try
             {
+                var tarefas = await _tarefaRepository.GetByStatusAsync(status);
+
                 var tarefasDto = _mapper.Map<ICollection<TarefaDTO>>(tarefas);
+
+                if (!tarefasDto.Any())
+                {
+                    return ResultService.NoContent(tarefasDto);
+                }
 
                 return ResultService.Ok(tarefasDto);
             }
-
-            return ResultService.NotFound<ICollection<TarefaDTO>>("Sem tarefas cadastradas");
-
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao consultar tarefa por status");
+                return ResultService.InternalServerError<ICollection<TarefaDTO>>("Erro interno na aplicação");
+            }
         }
 
         public async Task<ResultService> GetEnumValues()
@@ -141,18 +170,6 @@ namespace DesafioPonta.Api.Application.Services
             });
 
             return ResultService.Ok(enumData);
-        }
-
-        /// <summary>
-        /// Verifica se o id do criador da tarefa é o mesmo contido na claim 'Id' do Jwt
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="token"></param>
-        /// <returns></returns>
-        private bool VerificaUsuarioCriador(Guid userId, string token)
-        {
-            string userIdFromToken = _tokenHandler.GetUserIdFromToken(token);
-            return userIdFromToken == userId.ToString();
         }
     }
 }

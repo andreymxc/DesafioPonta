@@ -15,7 +15,6 @@ namespace DesafioPonta.Api.Infraestructure.Repositories
         }       
         public async Task<Tarefa> CreateAsync(Tarefa tarefa)
         {            
-            _dbContext.Add(tarefa);
             await _dbContext.SaveChangesAsync();
             return tarefa;
         }

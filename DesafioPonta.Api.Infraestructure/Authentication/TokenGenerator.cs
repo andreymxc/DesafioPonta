@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace DesafioPonta.Api.Infraestructure.Authentication
 {
-    public class AuthTokenHandler : ITokenGenerator
+    public class AuthTokenHandler : ITokenService
     {
         private const int _tokenExpirationInDays = 1;
         private const string _securityKey = "DesafioPontaTokenSecurityKey123456789012";
@@ -22,7 +22,7 @@ namespace DesafioPonta.Api.Infraestructure.Authentication
         {
             _httpContextAccessor = httpContextAccessor;
         }
-     
+
         public dynamic GenerateToken(Usuario usuario)
         {
             var claims = new List<Claim>
@@ -69,5 +69,19 @@ namespace DesafioPonta.Api.Infraestructure.Authentication
 
             return userId;
         }
+
+
+        /// <summary>
+        /// Verifica se o id do criador da tarefa é o mesmo contido na claim 'Id' do Jwt
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="jwtToken"></param>
+        /// <returns></returns>
+        public bool CheckIfCreatedByUser(Guid userId, string jwtToken)
+        {
+            string userIdFromToken = GetUserIdFromToken(jwtToken);
+            return userIdFromToken == userId.ToString();
+        }
+
     }
 }

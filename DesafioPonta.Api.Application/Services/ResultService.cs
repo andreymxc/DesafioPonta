@@ -12,6 +12,7 @@ namespace DesafioPonta.Api.Application.Services
     {
         private const int _badRequest = 400;
         private const int _ok = 200;
+        private const int _noContent = 204;
         private const int _notFound = 400;
         private const int _internalServerError = 500;
         private const int _forbidden = 401;
@@ -52,7 +53,10 @@ namespace DesafioPonta.Api.Application.Services
         public static ResultService InternalServerError(string message) => new ResultService() { IsSuccess = false, Message = message, StatusCode = _internalServerError };
         public static ResultService<T> InternalServerError<T>(string message) => new ResultService<T> { IsSuccess = false, Message = message, StatusCode = _internalServerError };
         public static ResultService Forbidden(string message) => new ResultService() { IsSuccess = false, Message = message, StatusCode = _forbidden };
-        public static ResultService<T> Forbidden<T>(string message) => new ResultService<T> { IsSuccess = false, Message = message, StatusCode = _forbidden };
+        public static ResultService<T> Forbidden<T>(string message) => new ResultService<T> { IsSuccess = false, Message = message,  StatusCode = _forbidden };
+        public static ResultService NoContent(string message) => new ResultService() { IsSuccess = true , Message = message, StatusCode = _noContent};
+        public static ResultService<T> NoContent<T>(T data) => new ResultService<T>() { IsSuccess = true, Data = data, StatusCode = _noContent };
+
     }
 
     public class ResultService<T> : ResultService

@@ -25,11 +25,12 @@ namespace DesafioPonta.Api.Controllers
         /// <summary>
         /// Retorna todas as tarefas ativas.
         /// </summary>
-        [ProducesResponseType(typeof(ResultService<TarefaDTO>), StatusCodes.Status200OK)]
         [HttpGet]
+        [ProducesResponseType(typeof(ResultService<TarefaDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<ActionResult> GetAllTarefas()
         {
-            var result = await _tarefaService.GetAllAsync();
+            var result = await _tarefaService.GetAllAsync();         
             return StatusCode(result.StatusCode, result);
         }
 
@@ -38,6 +39,7 @@ namespace DesafioPonta.Api.Controllers
         /// </summary>
         [HttpGet]
         [ProducesResponseType(typeof(ResultService<TarefaDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResultService<TarefaDTO>), StatusCodes.Status400BadRequest)]
         [Route("ConsultaTiposStatus")]
         public async Task<ActionResult> GetStatusTarefaEnumValues()
         {
@@ -90,7 +92,7 @@ namespace DesafioPonta.Api.Controllers
         }
 
         /// <summary>
-        /// Este método exclui uma tarefa existente passando o id correspondente.
+        /// Este método exclui uma tarefa existente passando o id correspondente. A exclusão é feita de maneira lógica.
         /// </summary>
         /// <param name="id"></param>
         [HttpDelete]

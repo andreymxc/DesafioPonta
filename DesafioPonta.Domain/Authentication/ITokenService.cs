@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace DesafioPonta.Api.Domain.Authentication
 {
-    public interface ITokenGenerator
+    public interface ITokenService
     {
         dynamic GenerateToken(Usuario? usuario);
         string GetUserIdFromToken(string token);
-
+        bool CheckIfCreatedByUser(Guid userId, string jwtToken);
     }
 }

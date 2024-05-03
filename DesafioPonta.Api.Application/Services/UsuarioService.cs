@@ -13,10 +13,10 @@ namespace DesafioPonta.Api.Application.Services
     {
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IMapper _mapper;
-        private readonly ITokenGenerator _tokenGenerator;
+        private readonly ITokenService _tokenGenerator;
         private readonly ILogger<UsuarioService> _logger;
 
-        public UsuarioService(IUsuarioRepository usuarioRepository, IMapper mapper, ITokenGenerator tokenGenerator, ILogger<UsuarioService> logger)
+        public UsuarioService(IUsuarioRepository usuarioRepository, IMapper mapper, ITokenService tokenGenerator, ILogger<UsuarioService> logger)
         {
             _usuarioRepository = usuarioRepository;
             _mapper = mapper;
