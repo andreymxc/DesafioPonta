@@ -2,7 +2,8 @@ Instrução de como executar a API localmente em sua máquina:
 
 Abra o Visual Studio 2022 e selecione a opção "Clone a Repository";
 
-Em repository location, preencher com o link do repositório: https://github.com/andreymxc/DesafioPonta.v2.git
+Em repository location, preencher com o link do repositório: https://github.com/andreymxc/DesafioPonta.v2.git;
+
 No Path, selecionar uma pasta VAZIA em um diretório de sua preferência e depois clique em "Clone";
 
 Após a solução ser aberta, selecione o projeto DesafioPonta.Api (Projeto ASP.NET Core) como o o Start Up Project;
