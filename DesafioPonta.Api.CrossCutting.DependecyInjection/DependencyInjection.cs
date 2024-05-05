@@ -20,7 +20,7 @@ namespace DesafioPonta.Api.CrossCutting.DependecyInjection
             services.AddDbContext<DataBaseContext>(options => options.UseInMemoryDatabase("DesafioPonta"));
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<ITarefaRepository, TarefaRepository>();
-            services.AddScoped<ITokenService, AuthTokenHandler>();
+            services.AddScoped<ITokenHandler, TokenHandler>();
             return services;
         }
 

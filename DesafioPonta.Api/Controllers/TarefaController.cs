@@ -38,7 +38,7 @@ namespace DesafioPonta.Api.Controllers
         /// Retorna os valores numéricos referentes aos status.
         /// </summary>
         [HttpGet]
-        [ProducesResponseType(typeof(ResultService<TarefaDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResultService<TarefaDTO>), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResultService<TarefaDTO>), StatusCodes.Status400BadRequest)]
         [Route("ConsultaTiposStatus")]
         public async Task<ActionResult> GetStatusTarefaEnumValues()

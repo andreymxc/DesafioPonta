@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace DesafioPonta.Api.Infraestructure.Authentication
 {
-    public class AuthTokenHandler : ITokenService
+    public class TokenHandler : ITokenHandler
     {
         private const int _tokenExpirationInDays = 1;
         private const string _securityKey = "DesafioPontaTokenSecurityKey123456789012";
 
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public AuthTokenHandler(IHttpContextAccessor httpContextAccessor)
+        public TokenHandler(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
         }
@@ -46,7 +46,7 @@ namespace DesafioPonta.Api.Infraestructure.Authentication
             return new
             {
                 access_token = token,
-                expirations = expiresIn
+                expiresIn = expiresIn
             };
         }
 

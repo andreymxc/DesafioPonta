@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿
+using AutoMapper;
 using DesafioPonta.Api.Application.Mappings;
 using System;
 using System.Collections.Generic;

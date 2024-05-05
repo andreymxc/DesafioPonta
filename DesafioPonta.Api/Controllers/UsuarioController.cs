@@ -17,17 +17,6 @@ namespace DesafioPonta.Api.Controllers
             _usuarioService = usuarioService;
         }
 
-        //[HttpGet]
-        //public async Task<ActionResult> GetAll()
-        //{
-        //    var result = await _usuarioService.GetAllAsync();
-
-        //    if (result.IsSuccess)
-        //        return Ok(result);
-
-        //    return BadRequest(result);
-        //}
-
         /// <summary>
         /// Cadastro de usuário para obter acesso a aplicação.
         /// </summary>
@@ -59,11 +48,7 @@ namespace DesafioPonta.Api.Controllers
         public async Task<ActionResult> Token([FromBody]CreateUsuarioDTO usuario) 
         {
             var result = await _usuarioService.GenerateToken(usuario);
-
-            if (result.IsSuccess)
-                return Ok(result);
-
-            return BadRequest(result);
+            return StatusCode(result.StatusCode, result);
         }
 
     }

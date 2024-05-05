@@ -15,10 +15,10 @@ namespace DesafioPonta.Api.Application.Services
     {
         private readonly ITarefaRepository _tarefaRepository;
         private readonly IMapper _mapper;
-        private readonly ITokenService _tokenService;
+        private readonly ITokenHandler _tokenService;
         private readonly ILogger _logger;
 
-        public TarefaService(ITarefaRepository tarefaRepository, ILogger<TarefaService> logger, IMapper mapper, ITokenService tokenService)
+        public TarefaService(ITarefaRepository tarefaRepository, ILogger<TarefaService> logger, IMapper mapper, ITokenHandler tokenService)
         {
             _tarefaRepository = tarefaRepository;
             _mapper = mapper;
@@ -74,7 +74,7 @@ namespace DesafioPonta.Api.Application.Services
                     return ResultService.NotFound<TarefaDTO>("Tarefa não encontrada");
 
                 if (!_tokenService.CheckIfCreatedByUser(existingTarefa.UserId, token))
-                    return ResultService.Forbidden<TarefaDTO>("Usuário não tem permissão para realizar essa ação");
+                    return ResultService.Unauthorized<TarefaDTO>("Usuário não tem permissão para realizar essa ação");
 
                 var entityTarefa = _mapper.Map<Tarefa>(tarefaDTO);
 
@@ -104,7 +104,7 @@ namespace DesafioPonta.Api.Application.Services
                     return ResultService.NotFound("Tarefa não encontrada");
 
                 if (!_tokenService.CheckIfCreatedByUser(tarefa.UserId, token))
-                    return ResultService.Forbidden("Usuário não tem permissão para realizar essa ação");
+                    return ResultService.Unauthorized("Usuário não tem permissão para realizar essa ação");
 
                 await _tarefaRepository.DeleteByIdAsync(id);
 
@@ -144,12 +144,7 @@ namespace DesafioPonta.Api.Application.Services
                 var tarefas = await _tarefaRepository.GetByStatusAsync(status);
 
                 var tarefasDto = _mapper.Map<ICollection<TarefaDTO>>(tarefas);
-
-                if (!tarefasDto.Any())
-                {
-                    return ResultService.NoContent(tarefasDto);
-                }
-
+          
                 return ResultService.Ok(tarefasDto);
             }
             catch (Exception ex)
@@ -161,15 +156,23 @@ namespace DesafioPonta.Api.Application.Services
 
         public async Task<ResultService> GetEnumValues()
         {
-            var enumValues = Enum.GetValues(typeof(StatusTarefa)).Cast<StatusTarefa>();
-
-            var enumData = enumValues.Select(e => new
+            try
             {
-                Valor = (int)e,
-                Descricao = e.ToString()
-            });
+                var enumValues = Enum.GetValues(typeof(StatusTarefa)).Cast<StatusTarefa>();
 
-            return ResultService.Ok(enumData);
+                var enumData = enumValues.Select(e => new
+                {
+                    Valor = (int)e,
+                    Descricao = e.ToString()
+                });
+
+                return ResultService.Ok(enumData);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao consultar valores numérios dos status");
+                return ResultService.InternalServerError("Erro interno na aplicação");
+            }
         }
     }
 }

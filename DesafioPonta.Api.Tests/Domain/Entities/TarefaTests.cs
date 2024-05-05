@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DesafioPonta.Api.Tests.Domain.Entities
 {
-    public class TarefaTest
+    public class TarefaTests
     {
         [Fact]
         public void CreateTarefa_ShouldThrowDomainException_When_TituloIsNullOrEmpty()

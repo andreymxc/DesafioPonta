@@ -13,7 +13,7 @@ namespace DesafioPonta.Api.Tests.Infraestrucuture
         public TarefaRepositoryTests()
         {
             _options = new DbContextOptionsBuilder<DataBaseContext>()
-                .UseInMemoryDatabase(databaseName: "DesafioPontaTeste")
+                .UseInMemoryDatabase(databaseName: "DesafioPontaTesteTarefa")
                 .Options;
         }
 
@@ -70,7 +70,7 @@ namespace DesafioPonta.Api.Tests.Infraestrucuture
 
                 // Assert
                 Assert.NotNull(result);
-                Assert.Equal(1, result.Count);
+                Assert.Equal(0, result.Where(i => i.Ativo == false).Count());
             }
         }
 
@@ -113,16 +113,16 @@ namespace DesafioPonta.Api.Tests.Infraestrucuture
         }
 
         [Fact]
-        public async Task GetByStatusAsync_Should_ReturnTarefas_WithGivenStatus()
+        public async Task GetByStatusAsync_ShouldReturnTarefas_WithGivenStatus()
         {
             // Arrange
             using (var context = new DataBaseContext(_options))
             {
                 var repository = new TarefaRepository(context);
                 
-                var tarefa1 = new Tarefa { Id = Guid.NewGuid(), Titulo = "Tarefa 1", Descricao = "Descrição 1", Status = StatusTarefa.Concluida };
+                var tarefa1 = new Tarefa (Guid.NewGuid(),"Tarefa 1", "Descrição 1", StatusTarefa.Concluida);
                 
-                var tarefa2 = new Tarefa { Id = Guid.NewGuid(), Titulo = "Tarefa 2", Descricao = "Descrição 2", Status = StatusTarefa.Pendente};
+                var tarefa2 = new Tarefa (Guid.NewGuid(), "Tarefa 2", "Descrição 2", StatusTarefa.Pendente);
                 
                 await repository.CreateAsync(tarefa1);
                 

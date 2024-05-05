@@ -18,7 +18,7 @@ namespace DesafioPonta.Api.Tests.Application
     {
         private Mock<ITarefaRepository> _tarefaRepository;
         private Mock<ILogger<TarefaService>> _logger;
-        private Mock<ITokenService> _tokenGenerator;
+        private Mock<ITokenHandler> _tokenGenerator;
         private TarefaService _tarefaService;
         private IMapper _mapper = new BaseTest().GetMapperProfile();
         private Mock<IMapper> _mapperMock; 
@@ -28,7 +28,7 @@ namespace DesafioPonta.Api.Tests.Application
         {
             _tarefaRepository = new Mock<ITarefaRepository>();
             _logger = new Mock<ILogger<TarefaService>>();
-            _tokenGenerator = new Mock<ITokenService>();
+            _tokenGenerator = new Mock<ITokenHandler>();
             _mapperMock = new Mock<IMapper>();
 
             _tarefaService = new TarefaService(
@@ -202,8 +202,8 @@ namespace DesafioPonta.Api.Tests.Application
             // Arrange
             var tarefas = new Collection<Tarefa>
                 {
-            new Tarefa { Id = Guid.NewGuid(), Titulo = "Tarefa 1" },
-            new Tarefa { Id = Guid.NewGuid(), Titulo = "Tarefa 2" }
+            new Tarefa { Id = Guid.NewGuid(), Titulo = "Tarefa 1", Descricao = "Descricao 1", Status = StatusTarefa.Pendente},
+            new Tarefa { Id = Guid.NewGuid(), Titulo = "Tarefa 2",Descricao = "Descricao 2", Status = StatusTarefa.Pendente}
             };
 
             _tarefaRepository.Setup(repo => repo.GetAllAsync())
@@ -211,8 +211,8 @@ namespace DesafioPonta.Api.Tests.Application
 
             var tarefasDto = new Collection<TarefaDTO>
             {
-                new TarefaDTO { Id = tarefas[0].Id, Titulo = tarefas[0].Titulo },
-                new TarefaDTO { Id = tarefas[1].Id, Titulo = tarefas[1].Titulo }
+                new TarefaDTO { Id = tarefas[0].Id, Titulo = tarefas[0].Titulo, Descricao = tarefas[0].Descricao, Status = tarefas[0].Status},
+                new TarefaDTO { Id = tarefas[1].Id, Titulo = tarefas[1].Titulo, Descricao = tarefas[1].Descricao, Status = tarefas[1].Status }
             };
 
             _mapperMock.Setup(mapper => mapper.Map<ICollection<TarefaDTO>>(tarefas))

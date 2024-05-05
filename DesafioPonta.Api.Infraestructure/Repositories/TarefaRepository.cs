@@ -14,7 +14,8 @@ namespace DesafioPonta.Api.Infraestructure.Repositories
             _dbContext = dbContext;
         }       
         public async Task<Tarefa> CreateAsync(Tarefa tarefa)
-        {            
+        {
+            _dbContext.Add(tarefa);
             await _dbContext.SaveChangesAsync();
             return tarefa;
         }
@@ -31,7 +32,7 @@ namespace DesafioPonta.Api.Infraestructure.Repositories
 
         public async Task<ICollection<Tarefa>> GetByStatusAsync(StatusTarefa status)
         {
-            return await _dbContext.Tarefas.Where(i => i.Status == status).ToListAsync();
+            return await _dbContext.Tarefas.Where(i => i.Status == status && i.Ativo).ToListAsync();
         }
 
         public async Task<Tarefa?> EditAsync(Tarefa tarefa)

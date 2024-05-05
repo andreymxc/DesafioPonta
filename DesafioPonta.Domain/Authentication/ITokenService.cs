@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DesafioPonta.Api.Domain.Authentication
 {
-    public interface ITokenService
+    public interface ITokenHandler
     {
         dynamic GenerateToken(Usuario? usuario);
         string GetUserIdFromToken(string token);
