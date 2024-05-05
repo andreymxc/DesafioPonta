@@ -4,9 +4,9 @@ Abra o Visual Studio 2022 e clique em "Clone a Repository";
 
 Na seção "repository location", cole o link do repositório: https://github.com/andreymxc/DesafioPonta;
 
-Escolha uma pasta VAZIA em seu diretório preferido em "Path" e clique em "Clone";
+Na seção "Path", escolha uma pasta VAZIA de sua preferência e clique em "Clone";
 
-Depois que a solução for aberta, selecione o projeto DesafioPonta.Api (Projeto ASP.NET Core) como o projeto inicial. (Você pode fazer isso clicando com o botão direito do mouse sobre o projeto DesafioPonta.Api e selecionando 'Setup as Start Up Project')
+Após o checkout do repositório, selecione o projeto DesafioPonta.Api (Projeto API ASP.NET Core) como o projeto inicial. (Você pode fazer isso clicando com o botão direito do mouse sobre o projeto DesafioPonta.Api e selecionando 'Setup as Start Up Project')
 
 Para garantir que a API funcione perfeitamente em sua máquina, não se esqueça de restaurar os pacotes do NuGet após clonar o repositório. Você pode fazer isso facilmente executando o comando dotnet restore no terminal do Visual Studio ou através do gerenciador de pacotes NuGet. Este passo é essencial para garantir que todas as dependências estejam corretamente instaladas e a aplicação possa ser executada sem problemas.
 
