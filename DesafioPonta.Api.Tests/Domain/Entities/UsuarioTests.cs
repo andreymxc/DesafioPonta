@@ -1,11 +1,6 @@
 ﻿using DesafioPonta.Api.Domain.Models.Entities;
 using DesafioPonta.Api.Domain.Models.Enums;
 using DesafioPonta.Api.Domain.Validations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DesafioPonta.Api.Tests.Domain.Entities
 {

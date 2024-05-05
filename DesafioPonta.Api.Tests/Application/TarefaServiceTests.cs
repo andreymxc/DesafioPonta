@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Castle.Core.Logging;
 using DesafioPonta.Api.Application.Dtos.Tarefa;
 using DesafioPonta.Api.Application.Services;
 using DesafioPonta.Api.Domain.Authentication;

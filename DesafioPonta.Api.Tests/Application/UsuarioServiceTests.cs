@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using DesafioPonta.Api.Application.Dtos.Usuario;
 using DesafioPonta.Api.Application.Services;
-using DesafioPonta.Api.Application.Services.Interfaces;
 using DesafioPonta.Api.Domain.Authentication;
 using DesafioPonta.Api.Domain.Models.Entities;
 using DesafioPonta.Api.Domain.Repositories;
-using DesafioPonta.Api.Infraestructure.Repositories;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.Extensions.Logging;

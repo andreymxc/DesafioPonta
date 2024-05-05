@@ -1,15 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using DesafioPonta.Api.Infraestructure;
-using DesafioPonta.Api.Domain.Repositories;
-using DesafioPonta.Api.Application.Services.Interfaces;
+﻿using DesafioPonta.Api.Application.Mappings;
 using DesafioPonta.Api.Application.Services;
-using DesafioPonta.Api.Infraestructure.Repositories;
-using DesafioPonta.Api.Application.Mappings;
-using Microsoft.EntityFrameworkCore;
+using DesafioPonta.Api.Application.Services.Interfaces;
 using DesafioPonta.Api.Domain.Authentication;
+using DesafioPonta.Api.Domain.Repositories;
+using DesafioPonta.Api.Infraestructure;
 using DesafioPonta.Api.Infraestructure.Authentication;
-using Microsoft.AspNetCore.Http;
+using DesafioPonta.Api.Infraestructure.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DesafioPonta.Api.CrossCutting.DependecyInjection
 {

@@ -1,7 +1,6 @@
 ﻿using DesafioPonta.Api.Application.Dtos.Tarefa;
 using DesafioPonta.Api.Application.Services;
 using DesafioPonta.Api.Application.Services.Interfaces;
-using DesafioPonta.Api.Domain.Models.Entities;
 using DesafioPonta.Api.Domain.Models.Enums;
 using DesafioPonta.Api.Helpers;
 using Microsoft.AspNetCore.Authorization;

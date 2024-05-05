@@ -2,7 +2,6 @@
 using DesafioPonta.Api.Application.Services;
 using DesafioPonta.Api.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace DesafioPonta.Api.Controllers
 {
