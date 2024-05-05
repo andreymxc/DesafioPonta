@@ -10,7 +10,7 @@ Após o checkout do repositório, selecione o projeto DesafioPonta.Api (Projeto 
 
 Para garantir que a API funcione perfeitamente em sua máquina, não se esqueça de restaurar os pacotes do NuGet após clonar o repositório. Você pode fazer isso facilmente executando o comando dotnet restore no terminal do Visual Studio ou através do gerenciador de pacotes NuGet. Este passo é essencial para garantir que todas as dependências estejam corretamente instaladas e a aplicação possa ser executada sem problemas.
 
-Execute a aplicação via ISS Express;
+Execute a aplicação via IIS Express;
 
 Ao ser direcionado para o Swagger, registre-se como usuário no endpoint /Usuario/Cadastrar. Precisaremos de um e-mail e uma senha forte.
 
