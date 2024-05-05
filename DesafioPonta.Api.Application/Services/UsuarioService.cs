@@ -86,7 +86,7 @@ namespace DesafioPonta.Api.Application.Services
 
                 var data = await _usuarioRepository.CreateAsync(entityUsuario);
 
-                return ResultService.Ok<UsuarioDTO>(_mapper.Map<UsuarioDTO>(data));
+                return ResultService.Ok<UsuarioDTO>("Usuário cadastrado com sucesso.", _mapper.Map<UsuarioDTO>(data));
             }
             catch (Exception ex)
             {

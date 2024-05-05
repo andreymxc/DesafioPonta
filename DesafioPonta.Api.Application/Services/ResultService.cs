@@ -48,6 +48,7 @@ namespace DesafioPonta.Api.Application.Services
         public static ResultService<T> Fail<T>(string message) => new ResultService<T> { IsSuccess = false, Message = message, StatusCode = _badRequest };
         public static ResultService Ok(string message) => new ResultService() { IsSuccess = true, Message = message, StatusCode = _ok };
         public static ResultService<T> Ok<T>(T data) => new ResultService<T>() { IsSuccess = true, Data = data, StatusCode = _ok };
+        public static ResultService<T> Ok<T>(string message, T data) => new ResultService<T>() { IsSuccess = true, Message = message, Data = data, StatusCode = _ok };
         public static ResultService NotFound(string message) => new ResultService() { IsSuccess = false, Message = message, StatusCode = _notFound };
         public static ResultService<T> NotFound<T>(string message) => new ResultService<T> { IsSuccess = false, Message = message, StatusCode = _notFound };
         public static ResultService InternalServerError(string message) => new ResultService() { IsSuccess = false, Message = message, StatusCode = _internalServerError };

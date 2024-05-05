@@ -1,4 +1,5 @@
-﻿using DesafioPonta.Api.Application.Dtos.Usuario;
+﻿using DesafioPonta.Api.Application.Dtos.Tarefa;
+using DesafioPonta.Api.Application.Dtos.Usuario;
 using DesafioPonta.Api.Application.Services;
 using DesafioPonta.Api.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -30,9 +31,9 @@ namespace DesafioPonta.Api.Controllers
             var result = await _usuarioService.CreateUsuario(usuario);
             
             if (result.IsSuccess)
-                return Ok();
+                result.Data = null;
 
-            return BadRequest(result);
+            return StatusCode(result.StatusCode, result);
         }
 
         /// <summary>
